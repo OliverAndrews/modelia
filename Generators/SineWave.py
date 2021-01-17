@@ -3,15 +3,15 @@ from numpy import sin, linspace, ndarray
 
 class SineWave:
     duration: int
-    timeSeries: object
+    timeSeries: ndarray
 
     def __init__(self, duration) -> None:
         self.duration = duration
 
     def initialize(self, samples: int) -> None:
-        self.timeSeries = linspace(0, self.duration, num=samples).tolist()
+        self.timeSeries = linspace(0, self.duration, num=samples)
 
-    def series(self) -> object:
+    def series(self) -> ndarray:
         return self.timeSeries
 
     def generate(self) -> ndarray:

@@ -6,15 +6,21 @@ from typing import List
 class TrainingData:
     dtype: type
 
-    intTrainX: List[int]
-    intTrainY: List[int]
+    floatAllX: List[float] = None
+    floatAllY: List[float] = None
 
-    intTestX: List[int]
-    intTestY: List[int]
+    intAllX: List[int] = None
+    intAllY: List[int] = None
 
-    floatTrainX: List[float]
-    floatTrainY: List[float]
+    intTrainX: List[int] = None
+    intTrainY: List[int] = None
 
-    floatTestX: List[float]
-    floatTestY: List[float]
+    intTestX: List[int] = None
+    intTestY: List[int] = None
+
+    floatTrainX: List[float] = None
+    floatTrainY: List[float] = None
+
+    floatTestX: List[float] = None
+    floatTestY: List[float] = None
 
