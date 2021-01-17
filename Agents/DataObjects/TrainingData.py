@@ -1,26 +1,26 @@
 from dataclasses import dataclass
-from typing import List
+from numpy import ndarray
 
 
 @dataclass
 class TrainingData:
     dtype: type
 
-    floatAllX: List[float] = None
-    floatAllY: List[float] = None
+    floatAllX: ndarray = None
+    floatAllY: ndarray = None
 
-    intAllX: List[int] = None
-    intAllY: List[int] = None
+    intAllX: ndarray = None
+    intAllY: ndarray = None
 
-    intTrainX: List[int] = None
-    intTrainY: List[int] = None
+    intTrainX: ndarray = None
+    intTrainY: ndarray = None
 
-    intTestX: List[int] = None
-    intTestY: List[int] = None
+    intTestX: ndarray = None
+    intTestY: ndarray = None
 
-    floatTrainX: List[float] = None
-    floatTrainY: List[float] = None
+    floatTrainX: ndarray = None
+    floatTrainY: ndarray = None
 
-    floatTestX: List[float] = None
-    floatTestY: List[float] = None
+    floatTestX: ndarray = None
+    floatTestY: ndarray = None
 

@@ -2,11 +2,8 @@ import matplotlib.pyplot as plt
 
 
 class Graph:
-    data: dict
 
-    def __init__(self, data: dict) -> None:
-        self.data = data
-
-    def build(self):
-        plt.plot(self.data["x"], self.data["y"])
+    @staticmethod
+    def build(x, y):
+        plt.plot(x, y)
         plt.show()
