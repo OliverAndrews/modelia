@@ -1,7 +1,7 @@
 from Agents.DataObjects.TrainingData import TrainingData
 from math import floor, ceil
 from numpy import array, ndarray
-
+from typing import List
 
 class Preprocessing:
 
@@ -45,7 +45,7 @@ class Preprocessing:
         return data
 
     @staticmethod
-    def reshapeLSTM(data: TrainingData, sampleSize: int, features: int) -> TrainingData:
+    def reshapeLSTM(data: TrainingData, maxSampleSize, features: int) -> TrainingData:
         if data.intAllX is not None:
             if len(data.intAllX) != len(data.floatAllY):
                 raise IndexError("Train and test sets are of differing size")
@@ -57,19 +57,19 @@ class Preprocessing:
 
         if data.dtype is float:
             if data.floatTrainX is not None:
-                xTrain: ndarray = array(data.floatTrainX)
-                xTest: ndarray = array(data.floatTestX)
-                outerArraySize: int = ceil(len(xTrain) / sampleSize)
-                outerArraySizeTest: int = ceil(len(xTest) / sampleSize)
-                data.floatTrainX = xTrain.reshape((sampleSize, outerArraySize, features))
-                data.floatTestX = xTest.reshape((sampleSize, outerArraySizeTest, features))
-                # Just testing something here to see if it would work
+                sampleSize: int
+                for i in reversed((range(maxSampleSize))):
+                    if len(data.floatAllX) % i == 0:
+                        sampleSize = i
+                        break
                 yTrain: ndarray = array(data.floatTrainY)
-                yTest: ndarray = array(data.floatTestY)
-                outerArraySize: int = ceil(len(yTrain) / sampleSize)
-                outerArraySizeTest: int = ceil(len(yTest) / sampleSize)
-                data.floatTrainY = yTrain.reshape((sampleSize, outerArraySize, features))
-                data.floatTestY = yTest.reshape((sampleSize, outerArraySizeTest, features))
+                newY: List[List[int]] = []
+                for step in range(0, len(yTrain), sampleSize):
+                    subsample = yTrain[step:step + sampleSize]
+                    newY.append(subsample)
+                yArr = array(newY)
+                final: ndarray = yArr.reshape((len(yArr), sampleSize, features))
+                data.floatTrainY = final
 
         elif data.dtype is int:
             if data.intTrainX is not None:
