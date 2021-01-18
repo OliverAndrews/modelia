@@ -21,12 +21,14 @@ if __name__ == '__main__':
     rulesCompiler: CompilerRules = CompilerRules(lossFunction="mse", optimizer="adam")
 
     # Getting Data Ready
-    data = Preprocessing.trainTestSplit(0.3, data)
+    data = Preprocessing.trainTestSplit(ratio=0.3, data=data)
     data = Preprocessing.reshapeLSTM(data=data, maxSampleSize=200, features=1)
 
     # Building Models
     lester: Lester = Lester()
-    lester.initialize((data.floatTrainX.shape[1], 1))
+
+    # TODO: Setze diese in das Datenobjekt,dann zum Konstrukteur!
+    lester.initialize(inputShape=(data.floatTrainX.shape[1], 1))
     lester.addSingleDense(1)
 
     # Training Models
