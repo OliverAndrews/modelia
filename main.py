@@ -27,7 +27,7 @@ if __name__ == '__main__':
     # Building Models
     lester: Lester = Lester()
 
-    # TODO: Setze diese in das Datenobjekt,dann zum Konstrukteur!
+    # TODO: Setze diese in das Datenobjekt
     lester.initialize(inputShape=(data.floatTrainX.shape[1], 1))
     lester.addSingleDense(1)
 
