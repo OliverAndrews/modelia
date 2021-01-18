@@ -2,6 +2,7 @@ from tensorflow.keras import Sequential
 from Agents.DataObjects.CompilerRules import CompilerRules
 from Agents.DataObjects.TrainingData import TrainingData
 from Agents.DataObjects.TrainingRules import TrainingRules
+from Visualizers.Graph import Graph
 
 
 class SequentialSchool:
@@ -13,26 +14,25 @@ class SequentialSchool:
     def initialize(self, rules: CompilerRules) -> None:
         self.model.compile(
             loss=rules.lossFunction,
-            optimizer=rules.optimizerString,
-            metrics=rules.metrics)
+            optimizer=rules.optimizer)
 
-    def fit(self, data: TrainingData, rules: TrainingRules) -> None:
+    def fit(self, data: TrainingData, rules: TrainingRules) -> None:  # , rules: TrainingRules) -> None:
         if data.dtype is str:
             raise TypeError("String values are invalid training data for Sequential models")
         elif data.dtype is float:
-            self.model.fit(
+            history = self.model.fit(
                 data.floatTrainX,
                 data.floatTrainY,
-                validation_data=(data.floatTestX, data.floatTestY),
+                epochs=rules.epochs,
                 batch_size=rules.batchSize,
-                epochs=rules.epochs)
+                verbose=rules.verbose)
+            if rules.plotLoss:
+                Graph.build([x for x, _ in enumerate(history)], history['loss'])
         elif data.dtype is int:
-            self.model.fit(
-                data.intTrainX,
-                data.intTrainY,
-                validation_data=(data.intTestX, data.intTestY),
-                batch_size=rules.batchSize,
-                epochs=rules.epochs)
+            raise Exception("Not implemented!")
+
+    def get(self) -> Sequential:
+        return self.model
 
     def __repr__(self) -> str:
         return f"Sequential School with model \n {self.model}"

@@ -6,3 +6,5 @@ class TrainingRules:
 
     batchSize: int
     epochs: int
+    plotLoss: bool = False
+    verbose: int = 1

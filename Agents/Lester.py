@@ -11,16 +11,15 @@ class Lester:
     def __init__(self) -> None:
         self.model = Sequential()
 
-    # inputShape: Tuple[int, int]
-    def initialize(self) -> None:
-        self.model.add(LSTM(10, return_sequences=True))
+    def initialize(self, inputShape: Tuple[int, int]) -> None:
+        self.model.add(LSTM(10, return_sequences=False, input_shape=inputShape))
 
     def addLSTMRange(self, start: int, end: int = 1, step: int = 1) -> None:
         for i in reversed(range(start, end, step)):
             self.model.add(LSTM(i))
 
     def addSingleLSTM(self, units: int) -> None:
-        self.model.add(LSTM(units, activation="tanh", return_sequences=True))
+        self.model.add(LSTM(units, activation="tanh", return_sequences=False))
 
     def addSingleDense(self, units: int) -> None:
         self.model.add(Dense(units, activation="tanh"))

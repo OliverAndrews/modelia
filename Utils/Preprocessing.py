@@ -1,7 +1,8 @@
 from Agents.DataObjects.TrainingData import TrainingData
-from math import floor, ceil
+from math import floor
 from numpy import array, ndarray
 from typing import List
+
 
 class Preprocessing:
 
@@ -58,18 +59,23 @@ class Preprocessing:
         if data.dtype is float:
             if data.floatTrainX is not None:
                 sampleSize: int
-                for i in reversed((range(maxSampleSize))):
+                for i in reversed((range(maxSampleSize + 1))):
                     if len(data.floatAllX) % i == 0:
                         sampleSize = i
                         break
                 yTrain: ndarray = array(data.floatTrainY)
-                newY: List[List[int]] = []
-                for step in range(0, len(yTrain), sampleSize):
+                newX: List[List[float]] = []
+                newY: List[float] = []
+                for step in range(0, len(yTrain)):
+                    if (step + sampleSize) >= len(yTrain):
+                        break
                     subsample = yTrain[step:step + sampleSize]
-                    newY.append(subsample)
-                yArr = array(newY)
-                final: ndarray = yArr.reshape((len(yArr), sampleSize, features))
-                data.floatTrainY = final
+                    newX.append(subsample)
+                    newY.append(yTrain[step + sampleSize])
+                XArr = array(newX)
+                YArr = array(newY)
+                data.floatTrainX = XArr.reshape((XArr.shape[0], XArr.shape[1], features))
+                data.floatTrainY = YArr
 
         elif data.dtype is int:
             if data.intTrainX is not None:

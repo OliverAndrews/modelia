@@ -1,4 +1,4 @@
-from numpy import sin, linspace, ndarray
+from numpy import sin, linspace, ndarray, array
 
 
 class SineWave:
@@ -15,4 +15,4 @@ class SineWave:
         return self.timeSeries
 
     def generate(self) -> ndarray:
-        return sin(self.timeSeries)
+        return array([sin(x) for x in self.timeSeries])
