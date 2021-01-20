@@ -10,7 +10,7 @@ from Agents.DataObjects.TrainingRules import TrainingRules
 if __name__ == '__main__':
 
     # Synthesizing Data
-    wave: SineWave = SineWave(5000)
+    wave: SineWave = SineWave()
     wave.initialize(5000)
     x: ndarray = wave.series()
     y: ndarray = wave.generate()

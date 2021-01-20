@@ -5,9 +5,6 @@ class SineWave:
     duration: int
     timeSeries: ndarray
 
-    def __init__(self, duration) -> None:
-        self.duration = duration
-
     def initialize(self, samples: int) -> None:
         self.timeSeries = linspace(0, self.duration, num=samples)
 
