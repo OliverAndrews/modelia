@@ -6,7 +6,7 @@ class SineWave:
     timeSeries: ndarray
 
     def initialize(self, samples: int) -> None:
-        self.timeSeries = linspace(0, self.duration, num=samples)
+        self.timeSeries = linspace(0, samples, num=samples)
 
     def series(self) -> ndarray:
         return self.timeSeries

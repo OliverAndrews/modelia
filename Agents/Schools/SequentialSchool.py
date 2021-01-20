@@ -27,7 +27,7 @@ class SequentialSchool:
                 batch_size=rules.batchSize,
                 verbose=rules.verbose)
             if rules.plotLoss:
-                Graph.build([x for x, _ in enumerate(history)], history['loss'])
+                Graph.build([x for x, _ in enumerate(history.history['loss'])], history.history['loss'])
         elif data.dtype is int:
             raise Exception("Not implemented!")
 

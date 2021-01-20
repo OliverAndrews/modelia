@@ -6,6 +6,9 @@ from Generators.SineWave import SineWave
 from numpy import ndarray
 from Agents.Schools.SequentialSchool import SequentialSchool
 from Agents.DataObjects.TrainingRules import TrainingRules
+from Agents.ModelWrappers.SequentialSimulation import SequentialSimulator
+from Visualizers.Graph import Graph
+
 
 if __name__ == '__main__':
 
@@ -17,7 +20,7 @@ if __name__ == '__main__':
 
     # Building Data Objects
     data: TrainingData = TrainingData(floatAllX=x, floatAllY=y, dtype=float)
-    rulesTrain: TrainingRules = TrainingRules(epochs=20, plotLoss=True, verbose=1, batchSize=20)
+    rulesTrain: TrainingRules = TrainingRules(epochs=3, plotLoss=True, verbose=1, batchSize=20)
     rulesCompiler: CompilerRules = CompilerRules(lossFunction="mse", optimizer="adam")
 
     # Getting Data Ready
@@ -35,3 +38,8 @@ if __name__ == '__main__':
     school: SequentialSchool = SequentialSchool(model=lester.get())
     school.initialize(rulesCompiler)
     school.fit(data, rulesTrain)
+    result: ndarray = SequentialSimulator.predictSinsoid(sampleSize=200, model=school.get(), features=1)
+    Graph.build(x, y)
+    Graph.build([x for x, _ in enumerate(result)][200:], result[200:])
+    Graph.build([x for x, _ in enumerate(result)], result)
+
