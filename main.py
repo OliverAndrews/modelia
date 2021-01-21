@@ -16,11 +16,11 @@ if __name__ == '__main__':
     wave: SineWave = SineWave()
     wave.initialize(5000)
     x: ndarray = wave.series()
-    y: ndarray = wave.generate()
+    y: ndarray = wave.generate(noise=True)
 
     # Building Data Objects
     data: TrainingData = TrainingData(floatAllX=x, floatAllY=y, dtype=float)
-    rulesTrain: TrainingRules = TrainingRules(epochs=3, plotLoss=True, verbose=1, batchSize=20)
+    rulesTrain: TrainingRules = TrainingRules(epochs=10, plotLoss=True, verbose=1, batchSize=50)
     rulesCompiler: CompilerRules = CompilerRules(lossFunction="mse", optimizer="adam")
 
     # Getting Data Ready
@@ -31,7 +31,11 @@ if __name__ == '__main__':
     lester: Lester = Lester()
 
     # TODO: Setze diese in das Datenobjekt
-    lester.initialize(inputShape=(data.floatTrainX.shape[1], 1))
+    lester.initialize(inputShape=(data.floatTrainX.shape[1], 1), returnSequence=True)
+    lester.addSingleLSTM(20, returnSequence=False)
+    lester.addSingleDense(20)
+    lester.addSingleDense(20)
+    lester.addDenseRange(start=19, end=2, step=5, activation="relu")
     lester.addSingleDense(1)
 
     # Training Models
@@ -39,7 +43,7 @@ if __name__ == '__main__':
     school.initialize(rulesCompiler)
     school.fit(data, rulesTrain)
     result: ndarray = SequentialSimulator.predictSinsoid(sampleSize=200, model=school.get(), features=1)
-    Graph.build(x, y)
-    Graph.build([x for x, _ in enumerate(result)][200:], result[200:])
-    Graph.build([x for x, _ in enumerate(result)], result)
+    Graph.build(x, y, title="Initial Data")
+    Graph.build([x for x, _ in enumerate(result)][200:], result[200:], title="Predicted Only")
+    Graph.build([x for x, _ in enumerate(result)], result, title="Prediction Target, and Predicted")
 
