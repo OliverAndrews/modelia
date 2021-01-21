@@ -22,7 +22,7 @@ class SequentialSimulator:
         # Warum macht dies Dreieck, dann richtig?
         # Ich denke, die Daten sind falsch geladen.
         test_y = calc_y[:sampleSize]
-        Graph.build(list(range(1, sampleSize + 1)), test_y)
+        Graph.build(list(range(1, sampleSize + 1)), test_y, title="Prediction Target")
         for i in range(len(test_xaxis) - sampleSize):
             net_input = test_y[i: i + sampleSize]
             # Das waren falsche Daten. Das Modell ist auch seltsam

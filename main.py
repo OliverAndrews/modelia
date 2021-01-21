@@ -14,19 +14,19 @@ if __name__ == '__main__':
 
     # Synthesizing Data
     wave: SineWave = SineWave()
-    wave.initialize(5000)
+    wave.initialize(100)
     x: ndarray = wave.series()
     y: ndarray = wave.generate(noise=True)
 
     # Building Data Objects
     data: TrainingData = TrainingData(floatAllX=x, floatAllY=y, dtype=float)
-    rulesTrain: TrainingRules = TrainingRules(epochs=10, plotLoss=True, verbose=1, batchSize=50)
+    rulesTrain: TrainingRules = TrainingRules(epochs=10, plotLoss=True, verbose=1, batchSize=1000)
     rulesCompiler: CompilerRules = CompilerRules(lossFunction="mse", optimizer="adam")
 
     # Getting Data Ready
     data = Preprocessing.trainTestSplit(ratio=0.3, data=data)
     data = Preprocessing.reshapeLSTM(data=data, maxSampleSize=200, features=1)
-
+    # Dynamic reshape data. Store data in one of rules set about shape of data. Use to build models, outputs.
     # Building Models
     lester: Lester = Lester()
 

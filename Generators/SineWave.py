@@ -1,4 +1,4 @@
-from numpy import sin, linspace, ndarray, array
+from numpy import sin, linspace, ndarray, array, arange, pi
 from random import uniform
 
 class SineWave:
@@ -6,7 +6,7 @@ class SineWave:
     timeSeries: ndarray
 
     def initialize(self, samples: int) -> None:
-        self.timeSeries = linspace(0, samples, num=samples)
+        self.timeSeries = arange(-samples*pi, 50*samples, 0.1) #linspace(0, samples, num=samples)
 
     def series(self) -> ndarray:
         return self.timeSeries
