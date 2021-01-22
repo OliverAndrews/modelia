@@ -16,7 +16,7 @@ class SequentialSimulator:
         # Basierend auf dieser:
         # https://medium.com/@krzysztofbalka/training-keras-lstm-to-generate-sine-function-2e3c0ca42c3b
         wave: SineWave = SineWave()
-        wave.initialize(1000)
+        wave.initialize(10)
         test_xaxis = wave.series()
         calc_y = wave.generate() # Das waren falsche Daten. Modell ist eindeutig überangepasst
         # Warum macht dies Dreieck, dann richtig?

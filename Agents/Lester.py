@@ -22,7 +22,6 @@ class Lester:
         for i in reversed(range(start, end, step)):
             self.model.add(Dense(i, activation=activation))
 
-
     def addSingleLSTM(self, units: int, returnSequence: bool = False) -> None:
         self.model.add(LSTM(units, activation="tanh", return_sequences=returnSequence))
 
