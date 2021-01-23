@@ -8,3 +8,12 @@ class TrainingRules:
     epochs: int
     plotLoss: bool = False
     verbose: int = 1
+
+    learningRate: int = None
+
+    # Multiuse variables
+    intContainerOne: int = None
+    intContainerTwo: int = None
+
+    floatContainerOne: float = None
+    floatContainerTwo: float = None

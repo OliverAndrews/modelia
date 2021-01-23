@@ -21,7 +21,7 @@ class TextSimulator:
         generated = ''
         sentence = data.text[start: start + data.maxLen]
         generated += sentence
-        for i in range(400):
+        for i in range(100):
             x = zeros((1, data.maxLen, len(data.chars)))
             for t, char in enumerate(sentence):
                 x[0, t, data.charIndices[char]] = 1.
