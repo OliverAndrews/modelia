@@ -11,7 +11,7 @@ if __name__ == '__main__':
         plotLoss=False,
         verbose=1,
         batchSize=36,
-        floatContainerOne=0.09,  # Learning Rate
+        floatContainerOne=0.06,  # Learning Rate
         floatContainerTwo=0.0  # This is momentum
     )
     data: TextData = TextProcess.vectorizeTextFile("Data/Text/notesfromunderground", TextData())
