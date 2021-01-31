@@ -1,4 +1,4 @@
-from tensorflow.keras.layers import LSTM, Dense, Embedding
+from tensorflow.keras.layers import LSTM, Dense
 from tensorflow.keras import Sequential
 from Utils.Silent import silent
 from typing import Tuple

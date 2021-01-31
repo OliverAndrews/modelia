@@ -39,7 +39,7 @@ class FyodorFridman:
         self.model.add(GRU(512, return_sequences=True))
         self.model.add(Dropout(0.1))
         self.model.add(GRU(512))
-        self.model.add(Dropout(0.1))  # Attilastic
+        self.model.add(Dropout(0.1))
         self.model.add(Dense(len(self.data.chars)))
         self.model.add(Activation('softmax'))
 

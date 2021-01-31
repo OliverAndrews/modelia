@@ -12,7 +12,7 @@ class FyodorFridmanSchool:
         self.model = model
         self.data = data
 
-    def train(self, rules: TrainingRules, learningRate: float) -> None:
+    def train(self, rules: TrainingRules) -> None:
         self.model.compile(
             loss='categorical_crossentropy',
             optimizer=SGD(
