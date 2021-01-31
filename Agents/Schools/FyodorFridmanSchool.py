@@ -3,6 +3,8 @@ from Agents.DataObjects.TextData import TextData
 from Agents.DataObjects.TrainingRules import TrainingRules
 from tensorflow.keras.optimizers import SGD
 from tensorflow.keras.callbacks import EarlyStopping
+from Utils.Callbacks.TextCallback import TextCallback
+
 
 class FyodorFridmanSchool:
     model: Sequential
@@ -25,7 +27,7 @@ class FyodorFridmanSchool:
             verbose=rules.verbose,
             batch_size=rules.batchSize,
             epochs=rules.epochs,
-            callbacks=[EarlyStopping(monitor='loss', patience=3)])
+            callbacks=[EarlyStopping(monitor='loss', patience=3), TextCallback(self.data, diversity=0.1)])
 
     def get(self) -> Sequential:
         return self.model
