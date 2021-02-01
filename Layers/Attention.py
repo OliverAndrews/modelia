@@ -22,6 +22,7 @@ class Attention(Layer):
 
         super(Attention, self).build(input_shape)
 
+
     def call(self, x):
         e = tanh(dot(x, self.W) + self.b)
         a: object = softmax(e, axis=1)

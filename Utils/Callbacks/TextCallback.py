@@ -15,5 +15,6 @@ class TextCallback(Callback):
 
     def on_epoch_end(self, batch, logs=None):
         model: Sequential = self.model
-        print("\n")
+        print()
         TextSimulator.generate(model=model, data=self.data, diversity=self.diversity)
+
